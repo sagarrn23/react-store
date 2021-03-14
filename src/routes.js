@@ -24,12 +24,13 @@ const ROUTES = [
 
 export default ROUTES;
 
-function RouteWithSubRoutes(route) {
+function RouteWithSubRoutes(route, index) {
 	return (
 		<Route
 			path={route.path}
 			exact={route.exact}
 			component={route.component}
+			key={index}
 		/>
 	);
 }
@@ -37,8 +38,8 @@ function RouteWithSubRoutes(route) {
 export function RenderRoutes(routes) {
 	return (
 		<Switch>
-			{routes.map((route) => {
-				return RouteWithSubRoutes(route);
+			{routes.map((route, i) => {
+				return RouteWithSubRoutes(route, i);
 			})}
 		</Switch>
 	);
