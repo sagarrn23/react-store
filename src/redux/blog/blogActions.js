@@ -7,7 +7,6 @@ export const fetchBlogsRequest = () => {
 };
 
 export const fetchBlogsSuccess = (blogs) => {
-	// console.log(blogs);
 	return {
 		type: blogAT.FETCH_BLOGS_SUCCESS,
 		payload: blogs

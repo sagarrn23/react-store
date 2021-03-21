@@ -4,7 +4,7 @@ import BlogCard from './BlogCard/BlogCard';
 
 function BlogList({ blogs }) {
 	return (
-		<ul className="text-black grid grid-cols-1 md:grid-cols-2">
+		<ul className="text-black grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
 			{blogs?.length
 				? blogs.map((blog) => {
 						return <BlogCard blogData={blog} key={uuidv4()} />;

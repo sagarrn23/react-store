@@ -2,10 +2,6 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 function BlogCard({ blogData }) {
-	{
-		console.log(blogData);
-	}
-
 	const convertDate = (date) => {
 		const dateString = new Date(date);
 		const month = [
@@ -28,7 +24,7 @@ function BlogCard({ blogData }) {
 	};
 
 	return (
-		<li className="my-4 sm:mx-4 flex flex-col">
+		<li className="flex flex-col">
 			<div>
 				<a href="#abc" className="block">
 					<img

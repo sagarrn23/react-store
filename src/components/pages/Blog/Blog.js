@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchBlogs } from '../../../api/blog/fetchBlogs';
 import BlogList from '../../layout/BlogList/BlogList';
+import BlogSlider from '../../layout/BlogSlider/BlogSlider';
 
 function Blog({ blogs, fetchBlogs }) {
 	useEffect(() => {
@@ -11,6 +12,7 @@ function Blog({ blogs, fetchBlogs }) {
 
 	return (
 		<div className="container my-4">
+			<BlogSlider />
 			<BlogList blogs={blogs} />
 		</div>
 	);
