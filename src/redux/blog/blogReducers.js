@@ -2,7 +2,7 @@ import blogAT from './blogActionTypes';
 
 const initialState = {
 	totalBlog: [],
-	currentBlog: [],
+	currentBlog: {},
 	loading: true,
 	error: ''
 };
@@ -29,11 +29,23 @@ const blogReducer = (state = initialState, action) => {
 			};
 
 		case blogAT.NEXT_BLOG_REQUEST:
-			return [];
+			return {
+				...state,
+				loading: true
+			};
 		case blogAT.NEXT_BLOG_SUCCESS:
-			return [];
+			return {
+				...state,
+				loading: false,
+				currentBlog: action.payload
+			};
 		case blogAT.NEXT_BLOG_ERROR:
-			return [];
+			return {
+				...state,
+				totalBlog: [],
+				loading: false,
+				currentBlog: action.payload
+			};
 
 		case blogAT.PREVIOUS_BLOG_REQUEST:
 			return [];

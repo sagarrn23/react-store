@@ -5,6 +5,7 @@ import {
 	faChevronLeft,
 	faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
+import { connect } from 'react-redux';
 
 const icons = [faChevronLeft, faChevronRight];
 
@@ -43,4 +44,8 @@ function BlogSlider() {
 	);
 }
 
-export default BlogSlider;
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BlogSlider);

@@ -18,3 +18,17 @@ export const fetchBlogs = () => {
 			});
 	};
 };
+
+export const fetchLatestBlog = (id) => {
+	return (dispatch) => {
+		dispatch(fetchBlogsRequest());
+		axios
+			.get(`/posts/${id}`)
+			.then((res) => {
+				dispatch(fetchBlogsSuccess(res.data));
+			})
+			.catch((err) => {
+				dispatch(fetchBlogsError(err));
+			});
+	};
+};
