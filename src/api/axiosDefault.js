@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 /**
- * @description Default configuration
+ * @description Default axios configuration
  */
 const domain = 'http://localhost/sagar/';
 const mainInstance = axios.create({

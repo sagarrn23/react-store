@@ -3,7 +3,7 @@ import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /**
- *  if true then white theme else dark theme
+ *  if white theme then show dark theme icon
  */
 
 function ToggleTheme() {
@@ -49,6 +49,7 @@ function ToggleTheme() {
 		setTheme(pastTheme === 'white' ? 'dark' : 'white');
 		setIconStyle(pastTheme === 'white' ? dayIconData : nightIconData);
 		htmlThemeClassHandler(pastTheme);
+		// eslint-disable-next-line
 	}, []);
 
 	return (
