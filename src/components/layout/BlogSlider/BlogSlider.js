@@ -24,6 +24,7 @@ function BlogSlider({ blog, fetchBlog }) {
 
 	return blog.length ? (
 		<div className="text-center my-8 text-black relative w-full h-60 sm:h-80 md:h-96">
+			{/* {console.log(blog.length)} */}
 			<img
 				src={blog[0].uagb_featured_image_src.full[0]}
 				className="w-full h-full object-cover object-center"
