@@ -20,42 +20,22 @@ export const fetchBlogsError = (error) => {
 	};
 };
 
-export const nextBlogRequest = () => {
+export const sliderBlogRequest = () => {
 	return {
-		type: blogAT.NEXT_BLOG_REQUEST
+		type: blogAT.SLIDER_BLOG_REQUEST
 	};
 };
 
-export const nextBlogSuccess = (blog) => {
+export const sliderBlogSuccess = (blog) => {
 	return {
-		type: blogAT.NEXT_BLOG_SUCCESS,
+		type: blogAT.SLIDER_BLOG_SUCCESS,
 		payload: blog
 	};
 };
 
-export const nextBlogError = (error) => {
+export const sliderBlogError = (error) => {
 	return {
-		type: blogAT.NEXT_BLOG_ERROR,
-		payload: error
-	};
-};
-
-export const previousBlogRequest = () => {
-	return {
-		type: blogAT.PREVIOUS_BLOG_REQUEST
-	};
-};
-
-export const previousBlogSuccess = (blog) => {
-	return {
-		type: blogAT.PREVIOUS_BLOG_SUCCESS,
-		payload: blog
-	};
-};
-
-export const previousBlogError = (error) => {
-	return {
-		type: blogAT.PREVIOUS_BLOG_ERROR,
+		type: blogAT.SLIDER_BLOG_ERROR,
 		payload: error
 	};
 };

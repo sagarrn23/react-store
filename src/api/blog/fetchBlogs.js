@@ -2,7 +2,10 @@ import axios from '../axiosDefault';
 import {
 	fetchBlogsError,
 	fetchBlogsRequest,
-	fetchBlogsSuccess
+	fetchBlogsSuccess,
+	sliderBlogError,
+	sliderBlogRequest,
+	sliderBlogSuccess
 } from '../../redux/blog/blogActions';
 
 export const fetchBlogs = () => {
@@ -21,14 +24,20 @@ export const fetchBlogs = () => {
 
 export const fetchLatestBlog = (id) => {
 	return (dispatch) => {
-		dispatch(fetchBlogsRequest());
+		dispatch(sliderBlogRequest());
 		axios
-			.get(`/posts/${id}`)
+			.get(`/posts/`, {
+				params: {
+					per_page: 1,
+					orderby: 'date',
+					page: id
+				}
+			})
 			.then((res) => {
-				dispatch(fetchBlogsSuccess(res.data));
+				dispatch(sliderBlogSuccess(res.data));
 			})
 			.catch((err) => {
-				dispatch(fetchBlogsError(err));
+				dispatch(sliderBlogError(err));
 			});
 	};
 };
