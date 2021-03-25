@@ -32,12 +32,14 @@ const blogReducer = (state = initialState, action) => {
 		case blogAT.SLIDER_BLOG_REQUEST:
 			return {
 				...state,
+				slideBlogAvailable: true,
 				loading: true
 			};
 		case blogAT.SLIDER_BLOG_SUCCESS:
 			return {
 				...state,
 				loading: false,
+				slideBlogAvailable: true,
 				currentBlog: action.payload
 			};
 		case blogAT.SLIDER_BLOG_ERROR:

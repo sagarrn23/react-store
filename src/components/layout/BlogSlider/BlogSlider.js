@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { v4 as uuidv4 } from 'uuid';
 import {
 	faChevronLeft,
 	faChevronRight
@@ -8,37 +7,19 @@ import {
 import { connect } from 'react-redux';
 import { fetchLatestBlog } from '../../../api/blog/fetchBlogs';
 
-const icons = [faChevronLeft, faChevronRight];
-
-function BlogSlider({ blog, blogAvailable, fetchBlog }) {
+function BlogSlider({ blog, fetchBlog }) {
 	const [sliderBlogNum, setSliderBlogNum] = useState(1);
 
 	useEffect(() => {
-		// console.log(sliderBlogNum);
 		fetchBlog(sliderBlogNum);
 	}, [sliderBlogNum]);
 
-	const setSliderBlogNumHandler = (index) => {
-		if (index === 0) {
-			setSliderBlogNum((prev) => prev - 1);
-			// fetchBlog(sliderBlogNum);
-		} else {
-			console.log(blogAvailable);
-			// console.log(sliderBlogNum);
-			if (blogAvailable) {
-				setSliderBlogNum((prev) => prev + 1);
-				// fetchBlog(sliderBlogNum);
-			}
-		}
-		console.log(sliderBlogNum);
+	const setSliderBlogPrevHandler = () => {
+		setSliderBlogNum((prev) => prev - 1);
 	};
 
-	const navigationArrowHandler = (index) => {
-		if (index === 0 && sliderBlogNum === 1) {
-			return 'cursor-not-allowed bg-red-900';
-		} else {
-			return '';
-		}
+	const setSliderBlogNextHandler = () => {
+		setSliderBlogNum((prev) => prev + 1);
 	};
 
 	return blog.length ? (
@@ -46,6 +27,7 @@ function BlogSlider({ blog, blogAvailable, fetchBlog }) {
 			<img
 				src={blog[0].uagb_featured_image_src.full[0]}
 				className="w-full h-full object-cover object-center"
+				alt={blog[0].title.rendered}
 			/>
 
 			<div
@@ -57,17 +39,22 @@ function BlogSlider({ blog, blogAvailable, fetchBlog }) {
 			></div>
 
 			<ul className="absolute top-0 right-0 opacity-100 py-4 px-2 flex text-white">
-				{icons.map((icon, index) => (
+				{sliderBlogNum > 1 ? (
 					<li
-						key={uuidv4()}
-						className={`px-4 py-2 bg-black mx-1 cursor-pointer ${navigationArrowHandler(
-							index
-						)}`}
-						onClick={() => setSliderBlogNumHandler(index)}
+						className="px-4 py-2 bg-black mx-1 cursor-pointer"
+						onClick={() => setSliderBlogPrevHandler()}
 					>
-						<FontAwesomeIcon icon={icon} />
+						<FontAwesomeIcon icon={faChevronLeft} />
 					</li>
-				))}
+				) : null}
+				{+blog[0].total_post !== sliderBlogNum ? (
+					<li
+						className="px-4 py-2 bg-black mx-1 cursor-pointer"
+						onClick={() => setSliderBlogNextHandler()}
+					>
+						<FontAwesomeIcon icon={faChevronRight} />
+					</li>
+				) : null}
 			</ul>
 			<div
 				className="absolute bottom-0 left-2/4 transform -translate-x-2/4 w-full p-4 md:p-8"
@@ -84,10 +71,8 @@ function BlogSlider({ blog, blogAvailable, fetchBlog }) {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state.currentBlog);
 	return {
-		blog: state.currentBlog,
-		blogAvailable: state.slideBlogAvailable
+		blog: state.currentBlog
 	};
 };
 

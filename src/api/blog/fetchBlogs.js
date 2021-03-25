@@ -34,7 +34,10 @@ export const fetchLatestBlog = (id) => {
 				}
 			})
 			.then((res) => {
-				dispatch(sliderBlogSuccess(res.data));
+				// console.log(res.headers);
+				const data = res.data;
+				data[0].total_post = res.headers['x-wp-total'];
+				dispatch(sliderBlogSuccess(data));
 			})
 			.catch((err) => {
 				dispatch(sliderBlogError(err));
