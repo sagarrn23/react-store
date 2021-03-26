@@ -5,7 +5,10 @@ import {
 	fetchBlogsSuccess,
 	sliderBlogError,
 	sliderBlogRequest,
-	sliderBlogSuccess
+	sliderBlogSuccess,
+	singleBlogError,
+	singleBlogRequest,
+	singleBlogSuccess
 } from '../../redux/blog/blogActions';
 
 export const fetchBlogs = () => {
@@ -40,6 +43,20 @@ export const fetchLatestBlog = (id) => {
 			})
 			.catch((err) => {
 				dispatch(sliderBlogError(err));
+			});
+	};
+};
+
+export const fetchSingleBlog = (id) => {
+	return (dispatch) => {
+		dispatch(singleBlogRequest());
+		axios
+			.get('/posts/' + id)
+			.then((res) => {
+				dispatch(singleBlogSuccess(res.data));
+			})
+			.catch((err) => {
+				dispatch(singleBlogError(err));
 			});
 	};
 };

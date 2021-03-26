@@ -3,7 +3,7 @@ import blogAT from './blogActionTypes';
 const initialState = {
 	totalBlog: [],
 	currentBlog: [],
-	slideBlogAvailable: true,
+	singleBlog: {},
 	loading: true,
 	error: ''
 };
@@ -32,20 +32,35 @@ const blogReducer = (state = initialState, action) => {
 		case blogAT.SLIDER_BLOG_REQUEST:
 			return {
 				...state,
-				slideBlogAvailable: true,
 				loading: true
 			};
 		case blogAT.SLIDER_BLOG_SUCCESS:
 			return {
 				...state,
 				loading: false,
-				slideBlogAvailable: true,
 				currentBlog: action.payload
 			};
 		case blogAT.SLIDER_BLOG_ERROR:
 			return {
 				...state,
-				slideBlogAvailable: false
+				error: action.error
+			};
+
+		case blogAT.SINGLE_BLOG_REQUEST:
+			return {
+				...state,
+				loading: true
+			};
+		case blogAT.SINGLE_BLOG_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				singleBlog: action.payload
+			};
+		case blogAT.SINGLE_BLOG_ERROR:
+			return {
+				...state,
+				error: action.error
 			};
 		default:
 			return state;

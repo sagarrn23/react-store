@@ -39,3 +39,23 @@ export const sliderBlogError = (error) => {
 		payload: error
 	};
 };
+
+export const singleBlogRequest = () => {
+	return {
+		type: blogAT.SINGLE_BLOG_REQUEST
+	};
+};
+
+export const singleBlogSuccess = (blog) => {
+	return {
+		type: blogAT.SINGLE_BLOG_SUCCESS,
+		payload: blog
+	};
+};
+
+export const singleBlogError = (error) => {
+	return {
+		type: blogAT.SINGLE_BLOG_ERROR,
+		payload: error
+	};
+};

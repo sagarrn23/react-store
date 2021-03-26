@@ -3,6 +3,7 @@ import App from './components/App';
 import Blog from './components/pages/Blog/Blog';
 import Shop from './components/pages/Shop/Shop';
 import { Route, Switch } from 'react-router-dom';
+import SingleBlog from './components/pages/SingleBlog/SingleBlog';
 
 const ROUTES = [
 	{
@@ -19,6 +20,11 @@ const ROUTES = [
 		path: '/shop',
 		exact: true,
 		component: Shop
+	},
+	{
+		path: `/blog/:post`,
+		exact: true,
+		component: SingleBlog
 	}
 ];
 
