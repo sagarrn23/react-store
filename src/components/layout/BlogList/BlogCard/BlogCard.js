@@ -58,7 +58,10 @@ function BlogCard({ blogData, location }) {
 				</p>
 				<h3 className="mb-3">
 					<Link
-						to={`${location.pathname}/${blogData.id}`}
+						to={{
+							pathname: `${location.pathname}/${blogData.slug}`,
+							id: blogData.id
+						}}
 						className="text-2xl font-bold leading-6 dark:text-white dark:hover:text-teal-400 hover:text-teal-700 transition-color duration-300 cursor-pointer"
 					>
 						{blogData.title.rendered}
