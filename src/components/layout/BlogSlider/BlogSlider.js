@@ -6,8 +6,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { connect } from 'react-redux';
 import { fetchLatestBlog } from '../../../api/blog/fetchBlogs';
+import { Link, withRouter } from 'react-router-dom';
 
-function BlogSlider({ blog, fetchBlog }) {
+function BlogSlider({ blog, fetchBlog, location }) {
 	const [sliderBlogNum, setSliderBlogNum] = useState(1);
 
 	useEffect(() => {
@@ -62,9 +63,16 @@ function BlogSlider({ blog, fetchBlog }) {
 				title={blog[0].title.rendered}
 			>
 				<h3 className="text-3xl sm:text-4xl md:text-5xl text-right font-bold leading-8 text-gray-200 cursor-pointer">
-					{blog[0].title.rendered.length > 35
-						? blog[0].title.rendered.slice(0, 35) + '...'
-						: blog[0].title.rendered}
+					<Link
+						to={{
+							pathname: `${location.pathname}/${blog[0].slug}`,
+							id: blog[0].id
+						}}
+					>
+						{blog[0].title.rendered.length > 35
+							? blog[0].title.rendered.slice(0, 35) + '...'
+							: blog[0].title.rendered}
+					</Link>
 				</h3>
 			</div>
 		</div>
@@ -83,4 +91,7 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlogSlider);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withRouter(BlogSlider));
