@@ -1,0 +1,149 @@
+1) Pure component - 
+    Only for the class components.
+    is used as shouldComponentUpdate. 
+    If no change in state then do not re render component. Class ABC extends PureComponent.
+    Does shallow comparison to check if there is any change.
+
+2) React Memo -
+    Used for functional component
+    Same as Pure component but for functional component
+
+3) Refs -
+    are used to access the dom nodes.
+    class component - 
+        check parent to child ref in class component - https://www.youtube.com/watch?v=8aCXVC9Qmto&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=29
+        create ref in parent and access ref of child component
+        it has to be class component.
+    functional component - 
+        To access ref in functional component we need to pass it from the class component to functional component with ref.
+        Inside functional component we will have to receive the ref from parent with React.forwardRef(props, ref).
+        Video - https://www.youtube.com/watch?v=RLWniwmfdq4&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=30
+
+4) Portals - 
+    With react Portals we can render our component outside the parent component.
+    We can render our component outside of root element which is our main element where we show our application.
+    Helpful for modals and popups etc
+    Video - https://www.youtube.com/watch?v=HpHLa-5Wdys&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3&index=31
+
+5) Error Boundries - 
+    componentDidCatch is used to log errors
+    getDerivedErrors is used to display the fallback UI if something goes wrong
+
+6) Higher order component - 
+    A component is HOC when it takes component as an argument and returns new component. We use HOC to enhance our component.
+    Used to avoide code duplication.
+    Always pass remaining props through spread operator.
+
+7) Render Props - 
+    The term "render props" refers to a technique for sharing code between React Components using a prop whose value is function.
+    Used to avoid code duplication.
+    render is just naming convention.
+    render props should have anonyms function.
+
+8) Context API - 
+    Create Context, provide, consumer in separate file
+    Create Provider - wrap root level component with provider and pass value attribute to the component
+    Create Consumer - Consume the data passed in value attribute of Provider.
+    Another way to use context is with context type. Export whole context
+
+9) Prop types - with prop types we can define what type of prop are accepted in the component.
+
+**********************************************************************************
+
+1) Redux
+    3 concepts of Redux
+        - Store : Here our application state will live
+        - Action : This is action which tell what changes we need to do with store
+        - Reducers : this connects action and store.
+    Action : is an object with type property
+    Reducers : function accepts state and action as an argument and returns new latest state
+    Create Store :  We create store and and pass it to the reducer,
+                    getState : to get state from the store
+                    Subscribe : We subscribe to the store to listen the changes in store and return function to unsubscribe
+                    dispatch : we dispatch action to the store to make the changes to the store
+                    unsubscribe : call unsubscribe function returned by subscribe
+    Combine reducer : Combine multiple reducer to create single store
+    Middleware: Middleware is something in between action and reducers. We can log, make async action with middleware. example redux-thunk.
+    React-redux - react redux is used to form connection between react and redux. It provides PROVIDER, CONNECT method for connection.
+
+    in react component -
+        mapStateToProps - receives state from redux store and we return the extracted value from the store means only required value from store,
+        mapDispatchToProps - receives dispatch as parameter and we can dispatch action from here
+        connect - this will connect mapStateToProps and mapDispatchToProps and we can use the return values from both the function in component as props.
+
+    react-redux - provides useSelector and useDispatch hooks as alternative for the connect so we can use redux with HOOKS.
+
+    action.paylods - when we want to provide some data with the action
+
+    ownProps - parameter is passed to mapStateToProps function to access props passed from the parent component
+    ownProps - parameter is passed to mapDispatchToProps function to access the dispatch method based on props sent by the parent component. 
+
+***************************************************************************************************************************************************************
+
+Hooks:
+    useState: set and Update state. 
+    useEffect: 
+        Replacement of componentDidMount, componentDidUpdate, componentWillUnmount. Reason code duplication.
+        pass blank array to run the useEffect once.
+        Pass state or props value in array so useEffect will only run when that values change.
+        Always check dependacy array values.
+        Define function inside useEffect if required and depend on props.
+    useContext:
+    useReducer:
+    useCallback: for performance optimization.
+
+**************************************************************************************************************************************************************************
+
+React Router:
+
+	BrowserRoute: 
+		Wrap the root component to access the routing features.
+		<BrowserRoute basename="/my-app">: if serving application under my-app folder.
+
+	Route: 
+		<Route path="/toPath" exact render={()=> <div>}>
+		path: path after domain
+		render: what data to render on that path
+		exact: if exact path then only render
+		component: We can load component also. component={posts}
+		We can have multiple same path route.
+
+	Link: 
+		<Link to="/blog">
+		use <Link> instead of <a> so page will not reload.
+		to attribute in link can have dynamic data. like path, hash
+		{
+			path: /thePath,
+			hash: '#submit', (if we want to jump to specific part of application)
+			search: if we want to send query parameter
+		}
+		We we navigate to the path and the component we render there received some props provided by the React router like history, location, match.
+
+	withRouter: 
+		to receive props added by react router in child level components we need to wrap that component with withRouter.
+		withRouter(childComponent)
+
+		use props passed by reactRouter to generate relative path
+
+	NavLink: 
+		Use navlink instead of <Link/> if we want to style active link.
+
+	* To get dynamic posts use parameters passed to router like id to retrive the data
+
+	Switch: 
+		Wrap routes with <Switch></Switch> if you want to load only first route that matches the parameter.
+
+	* Use History push for navigating to the single post like scenarios
+
+	Redirect: 
+		<Redirect from="path" to="path">
+
+	* Instead of Redirect use history.push or history.replace to push the page on stack.
+
+	Components lazyloading: Load only when need
+		Video: https://www.udemy.com/course/react-the-complete-guide-incl-redux/learn/lecture/8138598#overview
+
+	React Suspense: Feature of react 16
+		This is also used to load component only when needed.
+		React.Lazy
+		<Suspense><Component></Suspense>
