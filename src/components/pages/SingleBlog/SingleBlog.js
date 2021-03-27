@@ -5,7 +5,13 @@ import SingleBlogContent from '../../layout/SingleBlogContent/SingleBlogContent'
 
 export const SingleBlog = ({ singleBlog, fetchBlog, location }) => {
 	useEffect(() => {
-		fetchBlog(location.id);
+		const storedBlogId = localStorage.getItem('blogId');
+		localStorage.setItem('blogId', location.id || storedBlogId);
+		const id = location.id || localStorage.getItem('blogId');
+		fetchBlog(id);
+		return () => {
+			localStorage.removeItem('blogId');
+		};
 	}, []);
 
 	return (
