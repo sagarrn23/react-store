@@ -11,12 +11,21 @@ import {
 	singleBlogSuccess
 } from '../../redux/blog/blogActions';
 
-export const fetchBlogs = () => {
+export const fetchBlogs = (categories, author) => {
+	const args = {
+		categories: categories,
+		author: author
+	};
 	return (dispatch) => {
 		dispatch(fetchBlogsRequest());
 		axios
-			.get('/posts')
+			.get('/posts', {
+				params: {
+					...args
+				}
+			})
 			.then((res) => {
+				console.log(res);
 				dispatch(fetchBlogsSuccess(res.data));
 			})
 			.catch((err) => {

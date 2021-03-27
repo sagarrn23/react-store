@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { fetchBlogs } from '../../../../api/blog/fetchBlogs';
+import { connect } from 'react-redux';
 
-function BlogCard({ blogData, location }) {
+function BlogCard({ blogData, location, filterByCat, filterByAuthor }) {
 	const convertDate = (date) => {
 		const dateString = new Date(date);
 		const month = [
@@ -47,7 +49,10 @@ function BlogCard({ blogData, location }) {
 				<p className="py-4 flex items-center dark:text-teal-400 text-teal-700 ">
 					{blogData.cat_data.map((cat, i) => (
 						<React.Fragment key={uuidv4()}>
-							<span className="uppercase font-medium first:pl-0 cursor-pointer">
+							<span
+								className="uppercase font-medium first:pl-0 cursor-pointer"
+								onClick={() => filterByCat(cat.id)}
+							>
 								{cat.name}
 							</span>
 							{blogData.cat_data.length - 1 !== i && (
@@ -79,7 +84,12 @@ function BlogCard({ blogData, location }) {
 						/>
 					</div>
 					<p className="uppercase dark:text-gray-300 text-gray-500">
-						<span className="font-medium cursor-pointer mr-2 dark:text-teal-400 text-teal-700">
+						<span
+							className="font-medium cursor-pointer mr-2 dark:text-teal-400 text-teal-700"
+							onClick={() =>
+								filterByAuthor(blogData.author_data.id)
+							}
+						>
 							{blogData.author_data.name}
 						</span>
 						-
@@ -92,5 +102,17 @@ function BlogCard({ blogData, location }) {
 		</li>
 	);
 }
+// const mapStateToProps = (state) => {
+// 	return {};
+// };
 
-export default withRouter(BlogCard);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		filterByCat: (cat) => dispatch(fetchBlogs(cat)),
+		filterByAuthor: (author) => dispatch(fetchBlogs(null, author))
+	};
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(BlogCard));
+
+// export default withRouter(BlogCard);
