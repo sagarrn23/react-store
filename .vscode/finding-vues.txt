@@ -1,0 +1,117 @@
+1) v-text: replace the whole content.
+2) v-html: render data correctly if there is html
+3) v-bind: dynamic binding of html attributes
+4) v-for: For list rendering
+5) v-if: for conditional rendering
+6) Do not use v-if along side of v-for
+7) use <template> tag to create blank node. Like <React.Fragment>
+8) v-on: for events
+9) if we pass no parameter to functions vue automatically pass the event object but if we are passing
+    any custom parameter we can access the event with $event.
+10) v-modal: 2 way binding, form elements
+11) True checkbox and False checkbox
+
+12) Modifiers: we can add modifiers to v-model and v-on directive.
+    .trim: trim whitespaces
+    .number: convert to number
+    .lazy: change events(click outsite inout)
+    .prevent: prevent default
+    .key: ex: @keyup.enter, @keyup.shift
+
+13) v-once: renders only once
+14) v-pre: not to compile mustache code or code.
+
+15) Computed Properties:
+        Recalculate when its dependencies changes.
+        Can encapsulate some data and display same as data.
+        Computed properties are cached and methods are not cached.
+        Vue will serve the cached result instead of Recalculate. This improves the performance.
+        Basically for an example: if any value inside computed property does not change then vue will return the cached data and does not recalculate computed property.
+        We can use set(), get() inside computed property to read and write data.
+
+16) Watch property:
+    this property watch the changes of data, computed properties and props passed to the component.
+    The watch property received old and new value as an argument.
+    Set "immediate: true" if want to run on page load. Move the logic inside "handler" function inside property.
+    Watchers do not called deep nested properties if we directly mutate the object or array. So set "deep: true". Move the logic inside "handler" function inside property. If we are copying and replacing the object and array the deep value does not required.
+
+17) PropTypes:
+    Use object for props property. Specify the prop type for receiving data.
+    We can also set if the props is required or not with required attributes. Can also set default property.
+    Bind props to pass corrent data type.
+
+18) Non prop attribtes like id, class, style
+    By default it set passed attributes to first root element of component.
+    in props property set inheritAttrs: false to prevent default behaviour.
+    use v-bind="$attrs" in component to use the passed default html attribute to component.
+
+19) Provide and inject:
+        Like context api. Provide data from parent component to any nested child component and use inject in child component to use tha data.
+        Use provide as function if want to use inside the current component also.
+        This is just from parent to child. Benefit over passing data throught each component as props.
+
+20) Emit:
+        Pass data from child to parent component.
+        Define custom emit event in child component.
+        On event like click emit the custom emit event and use that in parent component to access the data.
+        We can pass data in second argument and receive the same in parent component.
+        On parent component listen to the event.
+        We can do validation too. 
+        Video: https://www.youtube.com/watch?v=S6RQOQVMYO0&list=PLC3y8-rFHvwgeQIfSDtEGVvvSEPDkL_1f&index=35
+
+21) modelValue props:
+        component by default will receive the modelValue props.
+        Emit $emit(update:modelValue, $event.target.value)
+
+22) Slots: <slots></slots>
+        Same like props.children in react.
+        We can specify default content inside slots.
+      Named Slots: v-slot
+        in child <slot name="header">
+        in parent <template v-slot:"header">
+        We can pass default slot <template v-slot:default> in child we can have one simple slot <slot></slot>
+      Slot Props:
+        Pass data from child to parent component so parent can control the view of the representation.
+        Video: https://www.youtube.com/watch?v=emi436qg9mg&list=PLC3y8-rFHvwgeQIfSDtEGVvvSEPDkL_1f&index=39
+        
+23) Scoped styling problems:
+        video: https://www.youtube.com/watch?v=T0yVKIcBkK0&list=PLC3y8-rFHvwgeQIfSDtEGVvvSEPDkL_1f&index=40
+
+24) dynamic component:
+        Render dynamic component with <component :is="activeTab"/>
+        Video: https://www.youtube.com/watch?v=2NXCytskC2s&list=PLC3y8-rFHvwgeQIfSDtEGVvvSEPDkL_1f&index=41
+      Keep-alive
+        Keep the dynamic component alive even if the component is removed from the dom.
+        Wrap the component with <keep-alive><component></keep-alive>
+
+26) Teleport component: 
+        This is same as React Portal
+        <teleport to="#portal-root">
+            <component>
+        </teleport>
+
+27) Lifecycle hooks:
+        beforeCreate(), created(),
+        beforeMount(), mounted(),
+        beforeUpdate(), updated(),
+        beforeUnmount(), unmounted()
+
+28) Template Refs:
+        Same as react Refs.
+        If ref is on Html element then it stays on that element.
+        If ref is on component then it refers to that component instance.
+
+29) Mixins:
+        Mixin is used to reuse the code.
+        We can use data, method, Watchers, computed properties in mixin.
+        The propery defined in component will have more weightage over mixin.
+        Video: https://www.youtube.com/watch?v=LyG_l5UoeHI&list=PLC3y8-rFHvwgeQIfSDtEGVvvSEPDkL_1f&index=50
+
+30) Filters:
+        filter property is used when use want to perform some small operation on rendered data.
+
+31) Composition API:
+        Replacement of data, methods, watch, computed and lifecycle hooks.
+        We use setup() methods instead.
+      setup(): Core of composition api,
+      
